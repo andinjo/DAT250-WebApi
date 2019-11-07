@@ -5,9 +5,9 @@ using Web.Responses;
 
 namespace Web
 {
-    public class MappingProfile : Profile
+    public class MapperProfile : Profile
     {
-        public MappingProfile()
+        public MapperProfile()
         {
             CreateMap<CreateForum, Forum>();
             CreateMap<Forum, ForumResponse>();

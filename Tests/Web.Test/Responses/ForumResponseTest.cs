@@ -13,7 +13,7 @@ namespace Web.Test.Responses
         public ForumResponseTest()
         {
             var mapperConfig = new MapperConfiguration(config =>
-                config.AddProfile(typeof(MappingProfile)));
+                config.AddProfile(typeof(MapperProfile)));
 
             _mapper = new Mapper(mapperConfig);
         }
