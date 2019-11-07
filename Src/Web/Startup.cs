@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repositories;
+using Services;
 
 namespace Web
 {
@@ -27,6 +28,12 @@ namespace Web
                     options
                         .UseSqlServer(_connectionString)
                         .UseLazyLoadingProxies());
+
+            services
+                .AddScoped<IForumRepository, ForumRepository>();
+
+            services
+                .AddScoped<IForumService, ForumService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
