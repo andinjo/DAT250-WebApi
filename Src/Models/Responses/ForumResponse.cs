@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Web.Responses
+namespace Models.Response
 {
     public class ForumResponse
     {

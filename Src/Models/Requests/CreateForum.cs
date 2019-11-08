@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Web.Requests
+namespace Models.Request
 {
     public class CreateForum
     {

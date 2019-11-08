@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Models
+namespace Models.Business
 {
-    public class Reply
+    public class Post
     {
         public int Id { get; set; }
         public string UserId { get; set; }
@@ -10,6 +11,7 @@ namespace Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public virtual Post Post { get; set; }
+        public virtual Forum Forum { get; set; }
+        public virtual IEnumerable<Reply> Replies { get; set; }
     }
 }

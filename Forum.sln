@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Src\Reposit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Src\Common\Common.csproj", "{7DCF3707-6AC6-4339-BC67-07C78EEABFAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Test", "Tests\Web.Test\Web.Test.csproj", "{57FE088B-00E5-4699-8238-DA892503DE1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Test", "Tests\Models.Test\Models.Test.csproj", "{57FE088B-00E5-4699-8238-DA892503DE1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

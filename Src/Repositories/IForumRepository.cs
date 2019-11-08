@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
-using Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Models.Business;
 
 namespace Repositories
 {
     public interface IForumRepository
     {
-        Task List(string userId);
+        Task<List<Forum>> List();
 
         Task Create(Forum forum);
 

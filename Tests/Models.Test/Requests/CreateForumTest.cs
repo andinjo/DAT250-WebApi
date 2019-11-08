@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Models;
-using Web.Requests;
+using Models.Business;
+using Models.Request;
 using Xunit;
 using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
@@ -16,6 +17,7 @@ namespace Web.Test.Requests
         {
             var mapperConfig = new MapperConfiguration(config =>
                 config.AddProfile(typeof(MapperProfile)));
+            mapperConfig.AssertConfigurationIsValid();
 
             _mapper = new Mapper(mapperConfig);
         }
@@ -50,7 +52,6 @@ namespace Web.Test.Requests
             {
                 MemberName = nameof(request.Description)
             };
-
             var result = Validator.TryValidateProperty(request.Description, context, null);
 
             Assert.False(result);

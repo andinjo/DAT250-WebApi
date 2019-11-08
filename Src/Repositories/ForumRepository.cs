@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Models;
+using Microsoft.EntityFrameworkCore;
+using Models.Business;
 
 namespace Repositories
 {
@@ -13,9 +15,9 @@ namespace Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task List(string userId)
+        public Task<List<Forum>> List()
         {
-            throw new System.NotImplementedException();
+            return _context.Forums.ToListAsync();
         }
 
         public Task Create(Forum forum)

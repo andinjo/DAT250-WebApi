@@ -1,13 +1,16 @@
-﻿using System.Threading.Tasks;
-using Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Models.Business;
+using Models.Request;
 
 namespace Services
 {
     public interface IForumService
     {
-        Task<Forum> Create(Forum forum);
+        Task<List<Forum>> List();
+        Task<Forum> Create(CreateForum create);
         Task<Forum> Read(int id);
-        Task<Forum> Update(Forum forum);
-        Task Delete(Forum forum);
+        Task<Forum> Update(int id, UpdateForum update);
+        Task Delete(int id);
     }
 }

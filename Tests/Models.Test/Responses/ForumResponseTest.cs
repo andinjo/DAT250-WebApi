@@ -1,7 +1,8 @@
 ﻿using System;
 using AutoMapper;
 using Models;
-using Web.Responses;
+using Models.Business;
+using Models.Response;
 using Xunit;
 
 namespace Web.Test.Responses
