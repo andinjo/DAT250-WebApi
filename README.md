@@ -1,4 +1,17 @@
-![alt text](https://raw.githubusercontent.com/andinjo/DAT250-WebApi/master/readme.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed volutpat nulla, auctor sagittis massa. Suspendisse nec magna arcu. Ut felis libero, tincidunt sed ex ac, rhoncus sagittis massa. Phasellus at eleifend libero, vitae sollicitudin eros. Ut lacinia ac odio id faucibus. Quisque dictum tempus dignissim. Donec ac arcu ipsum. Mauris volutpat lacus lacus, in feugiat sapien scelerisque a. Morbi mattis scelerisque mattis. 
-Amen.
+# Forum
+
+## Building
+---
+### Prerequisites
+
+1. .NET Core 3.0
+2. Microsoft SQL Server
+3. Dotnet ef CLI tool
+
+### Instructions
+
+1. Create a database called Forum on the local SQL server
+2. Clone this repository and navigate to the `repositories` project.
+3. Execute `dotnet ef database update -s ..\Web`
+4. Run the project as a .NET project
