@@ -19,12 +19,30 @@ namespace Services
 
         public User Auth()
         {
+            if (Exists()) return null;
+
             return new User
             {
-                Id = GetClaim(ClaimTypes.NameIdentifier),
+                Id = Id(),
                 Email = GetClaim(EmailKey),
                 Username = GetClaim(NameKey)
             };
+        }
+
+        public string Id()
+        {
+            return GetClaim(ClaimTypes.NameIdentifier);
+
+        }
+
+        public bool Is(string userId)
+        {
+            return Exists() && Id() == userId;
+        }
+
+        public bool Exists()
+        {
+            return !string.IsNullOrEmpty(Id());
         }
 
         private string GetClaim(string identifier)

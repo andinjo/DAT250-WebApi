@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Request;
 using Models.Response;
@@ -28,16 +29,21 @@ namespace Web.Controllers
             var forums = await _forumService.List();
             var response = _mapper.Map<List<ForumResponse>>(forums);
 
-            return new OkObjectResult(response);
+            return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ForumResponse>> Create([FromBody] CreateForum create)
         {
             var forum = await _forumService.Create(create);
+            if (forum == null)
+            {
+                return Unauthorized();
+            }
+
             var response = _mapper.Map<ForumResponse>(forum);
 
-            return new CreatedResult($"/api/forum/{response.Id}", response);
+            return Created($"/api/forum/{response.Id}", response);
         }
 
         [HttpGet("{id}")]
@@ -46,32 +52,32 @@ namespace Web.Controllers
             var forum = await _forumService.Read(id);
             if (forum == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
             var response = _mapper.Map<ForumResponse>(forum);
-            return new OkObjectResult(response);
+            return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ForumResponse>> Update(int id, UpdateForum update)
+        [HttpPut("{id}"), Authorize]
+        public async Task<ActionResult<ForumResponse>> Update(int id, [FromBody] UpdateForum update)
         {
             var forum = await _forumService.Update(id, update);
             if (forum == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
             var response = _mapper.Map<ForumResponse>(forum);
-            return new OkObjectResult(response);
+            return Ok(response);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             await _forumService.Delete(id);
 
-            return new NoContentResult();
+            return NoContent();
         }
     }
 }
