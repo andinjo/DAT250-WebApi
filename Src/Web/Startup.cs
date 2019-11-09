@@ -15,16 +15,16 @@ namespace Web
 {
     public class Startup
     {
-        private readonly string _connectionString;
-        private readonly string _authority;
-        private readonly string _audience;
+        private const string DatabaseKey = "Forum";
+        private const string AuthorityKey = "Auth0:AuthorityKey";
+        private const string AudienceKey = "Auth0:AudienceKey";
 
         public Startup(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("Forum");
-            _authority = configuration.GetValue<string>("Auth0:Authority");
-            _audience = configuration.GetValue<string>("Auth0:Audience");
+            Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -34,7 +34,7 @@ namespace Web
                 .AddAutoMapper(typeof(MapperProfile))
                 .AddDbContext<ForumContext>(options =>
                     options
-                        .UseSqlServer(_connectionString)
+                        .UseSqlServer(Configuration.GetConnectionString(DatabaseKey))
                         .UseLazyLoadingProxies())
                 .AddHttpContextAccessor()
                 .AddScoped(s =>
@@ -76,8 +76,8 @@ namespace Web
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options => {
-                options.Authority = _authority;
-                options.Audience = _audience;
+                options.Authority = Configuration[AuthorityKey];
+                options.Audience = Configuration[AudienceKey];
             });
         }
     }
