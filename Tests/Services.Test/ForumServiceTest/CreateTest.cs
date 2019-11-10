@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using FakeItEasy;
 using Models.Business;
-using Models.Request;
+using Models.Requests;
 using Xunit;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public class CreateForumTest : ForumServiceTest
+    public class CreateTest : BaseForumTest
     {
         private const string UserId = "user id";
 

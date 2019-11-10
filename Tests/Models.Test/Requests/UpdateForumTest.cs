@@ -1,27 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using Models;
 using Models.Business;
-using Models.Request;
+using Models.Requests;
 using Xunit;
-using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace Web.Test.Requests
 {
-    public class UpdateForumTest
+    public class UpdateForumTest : ModelBaseTest
     {
-        private readonly IMapper _mapper;
-
-        public UpdateForumTest()
-        {
-            var mapperConfig = new MapperConfiguration(config =>
-                config.AddProfile(typeof(MapperProfile)));
-            mapperConfig.AssertConfigurationIsValid();
-
-            _mapper = new Mapper(mapperConfig);
-        }
-
         [Fact]
         public void MapForum_FromUpdateForum_UpdatesDescriptionAndUpdatedAt()
         {
@@ -39,7 +25,7 @@ namespace Web.Test.Requests
                 UpdatedAt = yesterday
             };
 
-            var forum = _mapper.Map(request, oldForum);
+            var forum = Mapper.Map(request, oldForum);
 
             Assert.Equal(1, forum.Id);
             Assert.Equal("Test", forum.Title);

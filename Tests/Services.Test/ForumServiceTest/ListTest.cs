@@ -4,9 +4,9 @@ using FakeItEasy;
 using Models.Business;
 using Xunit;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public class ListForumTest : ForumServiceTest
+    public class ListTest : BaseForumTest
     {
         [Fact]
         public async Task List_FetchesAllForums()

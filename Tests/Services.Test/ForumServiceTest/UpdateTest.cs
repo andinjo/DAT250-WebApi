@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using FakeItEasy;
 using Models.Business;
-using Models.Request;
+using Models.Requests;
 using Xunit;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public class UpdateForumTest : ForumServiceTest
+    public class UpdateTest : BaseForumTest
     {
         [Fact]
         public async Task UpdateForum_ForumDoesNotExist_ReturnsNull()

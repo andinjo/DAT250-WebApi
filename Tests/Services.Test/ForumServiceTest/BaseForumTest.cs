@@ -3,9 +3,9 @@ using FakeItEasy;
 using Microsoft.Extensions.Logging;
 using Repositories;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public abstract class ForumServiceTest
+    public abstract class BaseForumTest
     {
         protected readonly IForumRepository ForumRepository;
         protected readonly IMapper Mapper;
@@ -13,14 +13,14 @@ namespace Services.Test.ForumService
 
         protected readonly IForumService ForumService;
 
-        protected ForumServiceTest()
+        protected BaseForumTest()
         {
             ForumRepository = A.Fake<IForumRepository>();
-            var logger = A.Fake<ILogger<Services.ForumService>>();
+            var logger = A.Fake<ILogger<ForumService>>();
             Mapper = A.Fake<IMapper>();
             User = A.Fake<IUserService>();
 
-            ForumService = new Services.ForumService(ForumRepository, logger, Mapper, User);
+            ForumService = new ForumService(ForumRepository, logger, Mapper, User);
         }
     }
 }

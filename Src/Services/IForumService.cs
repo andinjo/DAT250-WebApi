@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Models.Business;
-using Models.Request;
+using Models.Requests;
 
 namespace Services
 {

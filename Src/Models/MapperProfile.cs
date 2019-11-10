@@ -1,8 +1,8 @@
 ﻿using System;
 using AutoMapper;
 using Models.Business;
-using Models.Request;
-using Models.Response;
+using Models.Requests;
+using Models.Responses;
 
 namespace Models
 {
@@ -17,6 +17,9 @@ namespace Models
                     opt => opt.MapFrom(src => DateTime.Now)
                 );
             CreateMap<Forum, ForumResponse>(MemberList.Destination);
+
+            CreateMap<CreatePost, Post>(MemberList.Source);
+            CreateMap<Post, PostResponse>(MemberList.Destination);
         }
     }
 }

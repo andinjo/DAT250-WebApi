@@ -1,24 +1,12 @@
 ﻿using System;
-using AutoMapper;
-using Models;
 using Models.Business;
-using Models.Response;
+using Models.Responses;
 using Xunit;
 
 namespace Web.Test.Responses
 {
-    public class ForumResponseTest
+    public class ForumResponseTest : ModelBaseTest
     {
-        private readonly IMapper _mapper;
-
-        public ForumResponseTest()
-        {
-            var mapperConfig = new MapperConfiguration(config =>
-                config.AddProfile(typeof(MapperProfile)));
-
-            _mapper = new Mapper(mapperConfig);
-        }
-
         [Fact]
         public void MapToResponse_FromForum_FillsTitle()
         {
@@ -31,7 +19,7 @@ namespace Web.Test.Responses
                 UpdatedAt = DateTime.Now
             };
 
-            var response = _mapper.Map<ForumResponse>(forum);
+            var response = Mapper.Map<ForumResponse>(forum);
 
             Assert.Equal(forum.Id, response.Id);
             Assert.Equal(forum.Description, response.Description);

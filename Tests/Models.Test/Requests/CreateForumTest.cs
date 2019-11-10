@@ -1,27 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using AutoMapper;
-using Models;
 using Models.Business;
-using Models.Request;
+using Models.Requests;
 using Xunit;
-using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace Web.Test.Requests
 {
-    public class CreateForumTest
+    public class CreateForumTest : ModelBaseTest
     {
-        private readonly IMapper _mapper;
-
-        public CreateForumTest()
-        {
-            var mapperConfig = new MapperConfiguration(config =>
-                config.AddProfile(typeof(MapperProfile)));
-            mapperConfig.AssertConfigurationIsValid();
-
-            _mapper = new Mapper(mapperConfig);
-        }
-
         [Fact]
         public void MapToForum_FromCreateForum_FillsContentAndTitle()
         {
@@ -31,7 +17,7 @@ namespace Web.Test.Requests
                 Title = "Test"
             };
 
-            var forum = _mapper.Map<Forum>(request);
+            var forum = Mapper.Map<Forum>(request);
 
             Assert.Equal(request.Description, forum.Description);
             Assert.Equal(request.Title, forum.Title);

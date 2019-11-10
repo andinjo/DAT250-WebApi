@@ -3,9 +3,9 @@ using FakeItEasy;
 using Models.Business;
 using Xunit;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public class DeleteForumTest : ForumServiceTest
+    public class DeleteTest : BaseForumTest
     {
         [Fact]
         public async Task DeleteForum_ForumDoesNotExist_DoesNotCallDelete()

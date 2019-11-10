@@ -3,9 +3,9 @@ using FakeItEasy;
 using Models.Business;
 using Xunit;
 
-namespace Services.Test.ForumService
+namespace Services.Test.ForumServiceTest
 {
-    public class ReadForumTest : ForumServiceTest
+    public class ReadTest : BaseForumTest
     {
         [Fact]
         public async Task Read_FetchesForum()

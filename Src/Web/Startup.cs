@@ -41,10 +41,12 @@ namespace Web
                     s.GetService<IHttpContextAccessor>().HttpContext.User);
 
             services
-                .AddScoped<IForumRepository, ForumRepository>();
+                .AddScoped<IForumRepository, ForumRepository>()
+                .AddScoped<IPostRepository, PostRepository>();
 
             services
                 .AddScoped<IForumService, ForumService>()
+                .AddScoped<IPostService, PostService>()
                 .AddScoped<IUserService, UserService>();
         }
 

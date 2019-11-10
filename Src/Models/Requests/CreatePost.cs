@@ -2,10 +2,9 @@
 
 namespace Models.Requests
 {
-    public class UpdateForum
+    public class CreatePost
     {
         [Required]
-        [MaxLength(256)]
-        public string Description { get; set; }
+        public string Content { get; set; }
     }
 }
