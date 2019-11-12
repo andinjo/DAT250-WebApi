@@ -34,8 +34,7 @@ namespace Web
                 .AddAutoMapper(typeof(MapperProfile))
                 .AddDbContext<ForumContext>(options =>
                     options
-                        .UseSqlServer(Configuration.GetConnectionString(DatabaseKey))
-                        .UseLazyLoadingProxies())
+                        .UseSqlServer(Configuration.GetConnectionString(DatabaseKey)))
                 .AddHttpContextAccessor()
                 .AddScoped(s =>
                     s.GetService<IHttpContextAccessor>().HttpContext.User);

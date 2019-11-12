@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Models.Business;
+using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
 using Repositories;

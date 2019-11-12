@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Models.Business;
+using Models.Core;
 
 namespace Repositories
 {

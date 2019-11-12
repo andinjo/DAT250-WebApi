@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models.Business;
 using Models.Requests;
+using Models.Responses;
 using Services;
 
 namespace Web.Controllers
@@ -13,25 +14,30 @@ namespace Web.Controllers
     [Route("api/forum/{forumId}/[controller]")]
     public class PostController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IPostService _postService;
 
-        public PostController(IPostService postService)
+        public PostController(IMapper mapper, IPostService postService)
         {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _postService = postService ?? throw new ArgumentNullException(nameof(postService));
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> List(int forumId)
+        public async Task<ActionResult<List<PostResponse>>> List(int forumId)
         {
-            return Ok(await _postService.List(forumId));
+            var posts = await _postService.List(forumId);
+            var response = _mapper.Map<List<PostResponse>>(posts);
+            return Ok(response);
         }
 
         [HttpPost, Authorize]
-        public async Task<ActionResult<Post>> Create(int forumId, CreatePost create)
+        public async Task<ActionResult<PostResponse>> Create(int forumId, CreatePost create)
         {
             var post = await _postService.Create(forumId, create);
+            var response = _mapper.Map<PostResponse>(post);
 
-            return Created($"api/forum/{forumId}/post/{post.Id}", post);
+            return Created($"api/forum/{forumId}/post/{response.Id}", response);
         }
     }
 }

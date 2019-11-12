@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Models.Business;
+using Models.Core;
 using Models.Requests;
 
 namespace Services

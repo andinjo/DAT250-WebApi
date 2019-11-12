@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Models.Business;
+using Models.Core;
 using Models.Requests;
 using Xunit;
 
@@ -134,3 +134,4 @@ namespace Web.Test.Requests
         }
     }
 }
+

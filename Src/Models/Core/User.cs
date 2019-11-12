@@ -1,4 +1,4 @@
-﻿namespace Models.Business
+﻿namespace Models.Core
 {
     public class User
     {

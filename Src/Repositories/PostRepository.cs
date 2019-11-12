@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models.Business;
+using Microsoft.EntityFrameworkCore;
+using Models.Core;
 
 namespace Repositories
 {
@@ -17,8 +18,10 @@ namespace Repositories
 
         public async Task<List<Post>> List(int forumId)
         {
-            var forum = await _context.Forums.FindAsync(forumId);
-            return forum.Posts.ToList();
+            return await _context
+                .Posts
+                .Where(p => p.Forum.Id == forumId)
+                .ToListAsync();
         }
 
         public async Task<Post> Read(int id)

@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using Models.Business;
+using Models.Core;
 using Models.Requests;
 using Models.Responses;
 

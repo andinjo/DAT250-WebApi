@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Models.Business;
+using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
 using Repositories;
@@ -58,7 +58,7 @@ namespace Services
             post.UserId = _userService.Id();
             post.Forum = forum;
 
-            _logger.LogInformation($"Saving post {JsonConvert.SerializeObject(post.Content)}");
+            _logger.LogInformation($"Saving post {JsonConvert.SerializeObject(post)}");
             await _postRepository.Create(post);
             _logger.LogInformation($"Post was assigned ID {post.Id}");
 

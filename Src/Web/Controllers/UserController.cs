@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models.Business;
+using Models.Core;
 using Services;
 
 namespace Web.Controllers

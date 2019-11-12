@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FakeItEasy;
-using Models.Business;
+using Models.Core;
 using Xunit;
 
 namespace Services.Test.ForumServiceTest

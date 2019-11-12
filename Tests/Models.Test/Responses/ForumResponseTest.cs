@@ -1,5 +1,5 @@
 ﻿using System;
-using Models.Business;
+using Models.Core;
 using Models.Responses;
 using Xunit;
 

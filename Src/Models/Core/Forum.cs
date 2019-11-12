@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.Business
+namespace Models.Core
 {
     public class Forum
     {

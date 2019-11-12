@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Models.Business;
+using Models.Core;
 
 namespace Repositories
 {
