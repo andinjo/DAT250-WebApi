@@ -31,7 +31,7 @@ namespace Services.Test.ForumServiceTest
         }
 
         [Fact]
-        public async Task UpdateForum_UserIsAuthorized_ReturnsUpdatedForum()
+        public async Task UpdateForum_EverythingOk_ReturnsUpdatedForum()
         {
             var forum = new Forum
             {

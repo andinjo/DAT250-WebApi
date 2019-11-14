@@ -19,6 +19,11 @@ namespace Models
             CreateMap<Forum, ForumResponse>(MemberList.Destination);
 
             CreateMap<CreatePost, Post>(MemberList.Source);
+            CreateMap<UpdatePost, Post>(MemberList.Source)
+                .ForMember(
+                    dest => dest.UpdatedAt,
+                    opt => opt.MapFrom(src => DateTime.Now)
+                );
             CreateMap<Post, PostResponse>(MemberList.Destination);
         }
     }

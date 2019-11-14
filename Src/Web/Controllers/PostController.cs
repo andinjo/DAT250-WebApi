@@ -39,5 +39,31 @@ namespace Web.Controllers
 
             return Created($"api/forum/{forumId}/post/{response.Id}", response);
         }
+
+        [HttpGet("{postId}")]
+        public async Task<ActionResult<PostResponse>> Read(int forumId, int postId)
+        {
+            var post = await _postService.Read(postId);
+            var response = _mapper.Map<PostResponse>(post);
+
+            return Ok(response);
+        }
+
+        [HttpPut("{postId}"), Authorize]
+        public async Task<ActionResult<PostResponse>> Update(int forumId, int postId, UpdatePost update)
+        {
+            var post = await _postService.Update(postId, update);
+            var response = _mapper.Map<PostResponse>(post);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{postId}"), Authorize]
+        public async Task<ActionResult<PostResponse>> Delete(int forumId, int postId)
+        {
+            await _postService.Delete(postId);
+
+            return NoContent();
+        }
     }
 }

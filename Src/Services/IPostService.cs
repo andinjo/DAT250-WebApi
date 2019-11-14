@@ -10,5 +10,11 @@ namespace Services
         Task<List<Post>> List(int forumId);
 
         Task<Post> Create(int forumId, CreatePost create);
+
+        Task<Post> Read(int postId);
+
+        Task<Post> Update(int postId, UpdatePost update);
+
+        Task Delete(int postId);
     }
 }

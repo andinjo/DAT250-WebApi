@@ -7,6 +7,7 @@ using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
 using Repositories;
+using JsonConverter = System.Text.Json.Serialization.JsonConverter;
 
 namespace Services
 {
@@ -63,6 +64,54 @@ namespace Services
             _logger.LogInformation($"Post was assigned ID {post.Id}");
 
             return post;
+        }
+
+        public async Task<Post> Read(int postId)
+        {
+            _logger.LogInformation($"Reading post {postId}");
+            var post = await _postRepository.Read(postId);
+
+            return post;
+        }
+
+        public async Task<Post> Update(int postId, UpdatePost update)
+        {
+            var oldPost = await _postRepository.Read(postId);
+            if (oldPost == null)
+            {
+                _logger.LogWarning($"Post {postId} does not exist");
+                return null;
+            }
+
+            _logger.LogInformation($"Updating post {JsonConvert.SerializeObject(update)}");
+            if (!_userService.Is(oldPost.UserId))
+            {
+                _logger.LogWarning("User not authorized");
+                return null;
+            }
+
+            var post = _mapper.Map(update, oldPost);
+            post.UserId =_userService.Id();
+            await _postRepository.Update(post);
+
+            return post;
+        }
+
+        public async Task Delete(int postId)
+        {
+            var post = await _postRepository.Read(postId);
+            if (post == null)
+            {
+                _logger.LogWarning($"Post with id {postId} not found");
+                return;
+            }
+            if (!_userService.Is(post.UserId))
+            {
+                _logger.LogWarning("User not authorized");
+                return;
+            }
+
+            await _postRepository.Delete(post);
         }
     }
 }
