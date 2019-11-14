@@ -14,17 +14,22 @@ namespace Models
             CreateMap<UpdateForum, Forum>(MemberList.Source)
                 .ForMember(
                     dest => dest.UpdatedAt,
-                    opt => opt.MapFrom(src => DateTime.Now)
-                );
+                    opt => opt.MapFrom(src => DateTime.Now));
             CreateMap<Forum, ForumResponse>(MemberList.Destination);
 
             CreateMap<CreatePost, Post>(MemberList.Source);
             CreateMap<UpdatePost, Post>(MemberList.Source)
                 .ForMember(
                     dest => dest.UpdatedAt,
-                    opt => opt.MapFrom(src => DateTime.Now)
-                );
+                    opt => opt.MapFrom(src => DateTime.Now));
             CreateMap<Post, PostResponse>(MemberList.Destination);
+
+            CreateMap<CreateReply, Reply>(MemberList.Source);
+            CreateMap<UpdateReply, Reply>(MemberList.Source)
+                .ForMember(
+                    dest => dest.UpdatedAt,
+                    opt => opt.MapFrom(src => DateTime.Now));
+            CreateMap<Reply, ReplyResponse>(MemberList.Destination);
         }
     }
 }

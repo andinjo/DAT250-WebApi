@@ -32,7 +32,6 @@ namespace Services
         public string Id()
         {
             return GetClaim(ClaimTypes.NameIdentifier);
-
         }
 
         public bool Is(string userId)

@@ -7,7 +7,6 @@ using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
 using Repositories;
-using JsonConverter = System.Text.Json.Serialization.JsonConverter;
 
 namespace Services
 {
