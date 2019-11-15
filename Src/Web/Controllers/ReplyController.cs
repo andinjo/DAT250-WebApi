@@ -42,7 +42,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReplyResponse>> Create(int postId, int id)
+        public async Task<ActionResult<ReplyResponse>> Read(int postId, int id)
         {
             var reply = await _replyService.Read(id);
             var response = _mapper.Map<ReplyResponse>(reply);
@@ -50,8 +50,8 @@ namespace Web.Controllers
             return Ok(response);
         }
 
-        [HttpPost("{replyId}"), Authorize]
-        public async Task<ActionResult<ReplyResponse>> Create(int postId, int replyId, UpdateReply update)
+        [HttpPut("{replyId}"), Authorize]
+        public async Task<ActionResult<ReplyResponse>> Update(int postId, int replyId, UpdateReply update)
         {
             var reply = await _replyService.Update(replyId, update);
             var response = _mapper.Map<ReplyResponse>(reply);
@@ -59,7 +59,7 @@ namespace Web.Controllers
             return Ok(response);
         }
 
-        [HttpPost("{replyId}"), Authorize]
+        [HttpDelete("{replyId}"), Authorize]
         public async Task<ActionResult> Delete(int postId, int replyId)
         {
             await _replyService.Delete(replyId);

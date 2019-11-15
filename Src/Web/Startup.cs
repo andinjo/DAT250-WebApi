@@ -41,11 +41,13 @@ namespace Web
 
             services
                 .AddScoped<IForumRepository, ForumRepository>()
-                .AddScoped<IPostRepository, PostRepository>();
+                .AddScoped<IPostRepository, PostRepository>()
+                .AddScoped<IReplyRepository, ReplyRepository>();
 
             services
                 .AddScoped<IForumService, ForumService>()
                 .AddScoped<IPostService, PostService>()
+                .AddScoped<IReplyService, ReplyService>()
                 .AddScoped<IUserService, UserService>();
         }
 
