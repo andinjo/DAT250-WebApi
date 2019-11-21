@@ -7,6 +7,7 @@ using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
 using Repositories;
+using Repositories.Forum;
 
 namespace Services
 {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Models.Core;
 
-namespace Repositories
+namespace Repositories.Forum
 {
     public class PostRepository : IPostRepository
     {

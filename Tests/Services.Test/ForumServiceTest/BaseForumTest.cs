@@ -2,6 +2,7 @@
 using FakeItEasy;
 using Microsoft.Extensions.Logging;
 using Repositories;
+using Repositories.Forum;
 
 namespace Services.Test.ForumServiceTest
 {

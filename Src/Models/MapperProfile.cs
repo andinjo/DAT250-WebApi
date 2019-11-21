@@ -30,6 +30,8 @@ namespace Models
                     dest => dest.UpdatedAt,
                     opt => opt.MapFrom(src => DateTime.Now));
             CreateMap<Reply, ReplyResponse>(MemberList.Destination);
+
+            CreateMap<UserResponse, User>(MemberList.Destination);
         }
     }
 }

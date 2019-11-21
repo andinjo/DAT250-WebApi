@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Models.Core;
 using Models.Requests;
 using Repositories;
+using Repositories.Forum;
 
 namespace Services
 {

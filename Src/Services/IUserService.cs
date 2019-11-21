@@ -11,6 +11,5 @@ namespace Services
         bool Is(string userId);
 
         bool Exists();
-
     }
 }

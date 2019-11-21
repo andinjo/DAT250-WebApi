@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Models.Core;
 
-namespace Repositories
+namespace Repositories.Forum
 {
     public interface IReplyRepository
     {

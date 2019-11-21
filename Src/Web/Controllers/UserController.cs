@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Models.Core;
-using Services;
+using Services.ClientWrappers;
 
 namespace Web.Controllers
 {
@@ -11,17 +10,19 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUserClientWrapper _userClient;
 
-        public UserController(IUserService userService)
+        public UserController(IUserClientWrapper userClient)
         {
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _userClient = userClient ?? throw new ArgumentNullException(nameof(userClient));
         }
 
-        [HttpGet, Authorize]
-        public ActionResult<User> Read()
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<User>> Read(string userId)
         {
-            return new OkObjectResult(_userService.Auth());
+            var user = await _userClient.Get(userId);
+
+            return Ok(user);
         }
     }
 }
