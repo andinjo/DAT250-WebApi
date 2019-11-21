@@ -15,7 +15,8 @@ namespace Models
                 .ForMember(
                     dest => dest.UpdatedAt,
                     opt => opt.MapFrom(src => DateTime.Now));
-            CreateMap<Forum, ForumResponse>(MemberList.Destination);
+            CreateMap<Forum, ForumResponse>(MemberList.Destination)
+                .ForMember(dest => dest.Owner, opt => opt.Ignore());
 
             CreateMap<CreatePost, Post>(MemberList.Source);
             CreateMap<UpdatePost, Post>(MemberList.Source)

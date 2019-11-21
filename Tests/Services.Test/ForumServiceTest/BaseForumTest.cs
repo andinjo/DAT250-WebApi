@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FakeItEasy;
 using Microsoft.Extensions.Logging;
-using Repositories;
 using Repositories.Forum;
 
 namespace Services.Test.ForumServiceTest
@@ -10,7 +9,7 @@ namespace Services.Test.ForumServiceTest
     {
         protected readonly IForumRepository ForumRepository;
         protected readonly IMapper Mapper;
-        protected readonly IUserService User;
+        protected readonly IUserService UserService;
 
         protected readonly IForumService ForumService;
 
@@ -19,9 +18,13 @@ namespace Services.Test.ForumServiceTest
             ForumRepository = A.Fake<IForumRepository>();
             var logger = A.Fake<ILogger<ForumService>>();
             Mapper = A.Fake<IMapper>();
-            User = A.Fake<IUserService>();
+            UserService = A.Fake<IUserService>();
 
-            ForumService = new ForumService(ForumRepository, logger, Mapper, User);
+            ForumService = new ForumService(
+                ForumRepository,
+                logger,
+                Mapper,
+                UserService);
         }
     }
 }

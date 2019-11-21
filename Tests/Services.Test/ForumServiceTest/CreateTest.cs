@@ -13,7 +13,7 @@ namespace Services.Test.ForumServiceTest
         [Fact]
         public async Task Create_UserNotAuthenticated_ReturnsNull()
         {
-            A.CallTo(() => User.Exists())
+            A.CallTo(() => UserService.Exists())
                 .Returns(false);
 
             var forum = await ForumService.Create(new CreateForum());
@@ -26,9 +26,9 @@ namespace Services.Test.ForumServiceTest
         {
             var create = new CreateForum();
             var forum = new Forum {Title = "title", Description = "description"};
-            A.CallTo(() => User.Exists()).Returns(true);
+            A.CallTo(() => UserService.Exists()).Returns(true);
             A.CallTo(() => Mapper.Map<Forum>(create)).Returns(forum);
-            A.CallTo(() => User.Id()).Returns(UserId);
+            A.CallTo(() => UserService.Id()).Returns(UserId);
 
             await ForumService.Create(create);
 

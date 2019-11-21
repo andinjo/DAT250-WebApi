@@ -19,7 +19,7 @@ namespace Services
 
         public User Auth()
         {
-            if (Exists()) return null;
+            if (!Exists()) return null;
 
             return new User
             {

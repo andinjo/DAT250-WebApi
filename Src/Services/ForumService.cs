@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 using Models.Core;
 using Models.Requests;
 using Newtonsoft.Json;
-using Repositories;
 using Repositories.Forum;
+using Services.ClientWrappers;
 
 namespace Services
 {

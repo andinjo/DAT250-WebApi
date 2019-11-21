@@ -23,7 +23,7 @@ namespace Services.Test.ForumServiceTest
         {
             var forum = new Forum {UserId = "Id"};
             A.CallTo(() => ForumRepository.Read(1)).Returns(forum);
-            A.CallTo(() => User.Is(forum.UserId)).Returns(false);
+            A.CallTo(() => UserService.Is(forum.UserId)).Returns(false);
 
             var response = await ForumService.Update(1, new UpdateForum());
 
@@ -39,7 +39,7 @@ namespace Services.Test.ForumServiceTest
                 UserId = "User id",
             };
             A.CallTo(() => ForumRepository.Read(1)).Returns(forum);
-            A.CallTo(() => User.Is(forum.UserId)).Returns(true);
+            A.CallTo(() => UserService.Is(forum.UserId)).Returns(true);
 
             var update = await ForumService.Update(1, new UpdateForum());
 
