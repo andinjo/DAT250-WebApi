@@ -2,6 +2,7 @@
 using Clients;
 using FakeItEasy;
 using Microsoft.Extensions.Logging;
+using Models;
 using Services.ClientWrappers;
 
 namespace Services.Test.UserClientWrapperTest
@@ -10,6 +11,7 @@ namespace Services.Test.UserClientWrapperTest
     {
         protected readonly IUserClient Client;
         protected readonly IMapper Mapper;
+        protected readonly AccessToken AccessToken = new AccessToken {Value = "Bearer token"};
 
         protected readonly IUserClientWrapper ClientWrapper;
 
@@ -19,7 +21,7 @@ namespace Services.Test.UserClientWrapperTest
             Mapper = A.Fake<IMapper>();
             var logger = A.Fake<ILogger<UserClientWrapper>>();
 
-            ClientWrapper = new UserClientWrapper(Client, Mapper, logger);
+            ClientWrapper = new UserClientWrapper(Client, Mapper, logger, AccessToken);
         }
     }
 }

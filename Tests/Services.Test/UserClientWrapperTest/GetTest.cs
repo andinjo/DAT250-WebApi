@@ -23,7 +23,7 @@ namespace Services.Test.UserClientWrapperTest
                 Email = "test@domain.com",
                 Id = UserId
             };
-            A.CallTo(() => Client.Get(UserId))
+            A.CallTo(() => Client.Get(UserId, AccessToken.Value))
                 .Returns(userResponse);
             A.CallTo(() => Mapper.Map<User>(userResponse))
                 .Returns(expectedUser);
@@ -45,7 +45,7 @@ namespace Services.Test.UserClientWrapperTest
                     StatusCode = HttpStatusCode.NotFound
                 }
             );
-            A.CallTo(() => Client.Get(UserId))
+            A.CallTo(() => Client.Get(UserId, AccessToken.Value))
                 .ThrowsAsync(exception);
 
             var user = await ClientWrapper.Get(UserId);

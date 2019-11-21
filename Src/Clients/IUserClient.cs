@@ -7,6 +7,6 @@ namespace Clients
     public interface IUserClient
     {
         [Get("/api/v2/users/{userId}")]
-        Task<UserResponse> Get(string userId);
+        Task<UserResponse> Get(string userId, [Header("Authorization")] string authorization);
     }
 }
