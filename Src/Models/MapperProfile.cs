@@ -23,14 +23,16 @@ namespace Models
                 .ForMember(
                     dest => dest.UpdatedAt,
                     opt => opt.MapFrom(src => DateTime.Now));
-            CreateMap<Post, PostResponse>(MemberList.Destination);
+            CreateMap<Post, PostResponse>(MemberList.Destination)
+                .ForMember(dest => dest.Author, opt => opt.Ignore());
 
             CreateMap<CreateReply, Reply>(MemberList.Source);
             CreateMap<UpdateReply, Reply>(MemberList.Source)
                 .ForMember(
                     dest => dest.UpdatedAt,
                     opt => opt.MapFrom(src => DateTime.Now));
-            CreateMap<Reply, ReplyResponse>(MemberList.Destination);
+            CreateMap<Reply, ReplyResponse>(MemberList.Destination)
+                .ForMember(dest => dest.Author, opt => opt.Ignore());
 
             CreateMap<UserResponse, User>(MemberList.Destination);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -16,11 +17,16 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPostService _postService;
+        private readonly IUserService _userService;
 
-        public PostController(IMapper mapper, IPostService postService)
+        public PostController(
+            IMapper mapper,
+            IPostService postService,
+            IUserService userService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _postService = postService ?? throw new ArgumentNullException(nameof(postService));
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         [HttpGet]
@@ -28,6 +34,19 @@ namespace Web.Controllers
         {
             var posts = await _postService.List(forumId);
             var response = _mapper.Map<List<PostResponse>>(posts);
+
+            var userIds = posts.Select(p => p.UserId).Distinct();
+            var users = await Task.WhenAll(_userService.List(userIds));
+
+            response = response.Select(post =>
+            {
+                var userId = posts.First(p => p.Id == post.Id).UserId;
+                var username = users.First(u => u.Id == userId).Username;
+                post.Author = username;
+
+                return post;
+            }).ToList();
+
             return Ok(response);
         }
 
@@ -36,6 +55,7 @@ namespace Web.Controllers
         {
             var post = await _postService.Create(forumId, create);
             var response = _mapper.Map<PostResponse>(post);
+            response.Author = _userService.Auth().Username;
 
             return Created($"api/forum/{forumId}/post/{response.Id}", response);
         }
@@ -44,7 +64,14 @@ namespace Web.Controllers
         public async Task<ActionResult<PostResponse>> Read(int forumId, int postId)
         {
             var post = await _postService.Read(postId);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
             var response = _mapper.Map<PostResponse>(post);
+            var user = await _userService.Read(post.UserId);
+            response.Author = user.Username;
 
             return Ok(response);
         }
@@ -53,7 +80,13 @@ namespace Web.Controllers
         public async Task<ActionResult<PostResponse>> Update(int forumId, int postId, UpdatePost update)
         {
             var post = await _postService.Update(postId, update);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
             var response = _mapper.Map<PostResponse>(post);
+            response.Author = _userService.Auth().Id;
 
             return Ok(response);
         }

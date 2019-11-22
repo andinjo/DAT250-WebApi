@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Models.Core;
 using Models.Requests;
-using Repositories;
+using Models.Responses;
 using Repositories.Forum;
 
 namespace Services
@@ -16,7 +17,7 @@ namespace Services
         private readonly IMapper _mapper;
         private readonly IPostService _postService;
         private readonly IReplyRepository _replyRepository;
-        private readonly IUserService _user;
+        private readonly IUserService _userService;
 
         public ReplyService(
             ILogger<ReplyService> logger,
@@ -29,7 +30,7 @@ namespace Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _postService = postService ?? throw new ArgumentNullException(nameof(postService));
             _replyRepository = replyRepository ?? throw new ArgumentNullException(nameof(replyRepository));
-            _user = user ?? throw new ArgumentNullException(nameof(user));
+            _userService = user ?? throw new ArgumentNullException(nameof(user));
         }
 
         public Task<List<Reply>> List(int postId)
@@ -39,7 +40,7 @@ namespace Services
 
         public async Task<Reply> Create(int postId, CreateReply create)
         {
-            if (!_user.Exists())
+            if (!_userService.Exists())
             {
                 _logger.LogWarning("User not authenticated");
                 return null;
@@ -52,7 +53,7 @@ namespace Services
             }
 
             var reply = _mapper.Map<Reply>(create);
-            reply.UserId = _user.Id();
+            reply.UserId = _userService.Id();
             reply.Post = post;
 
             await _replyRepository.Create(reply);
@@ -73,7 +74,7 @@ namespace Services
                 _logger.LogWarning($"Reply {id} not found");
                 return null;
             }
-            if (!_user.Is(oldReply.UserId))
+            if (!_userService.Is(oldReply.UserId))
             {
                 _logger.LogWarning("User is authorized");
                 return null;
@@ -94,7 +95,7 @@ namespace Services
                 return;
             }
 
-            if (!_user.Is(reply.UserId))
+            if (!_userService.Is(reply.UserId))
             {
                 _logger.LogWarning("User not authorized");
                 return;

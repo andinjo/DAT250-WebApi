@@ -1,4 +1,6 @@
-﻿using Models.Core;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Models.Core;
 
 namespace Services
 {
@@ -11,5 +13,9 @@ namespace Services
         bool Is(string userId);
 
         bool Exists();
+
+        Task<User> Read(string userId);
+
+        IEnumerable<Task<User>> List(IEnumerable<string> userIds);
     }
 }
